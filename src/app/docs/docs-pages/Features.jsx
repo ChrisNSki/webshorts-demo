@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { tomorrow } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { Button } from '@/components/ui/button';
+import DocsLink from '@/components/DocsLink';
 
 // Custom CodeBlock component with copy functionality
 const CodeBlock = ({ children, language, style, customStyle }) => {
@@ -236,6 +237,47 @@ export default function Features() {
                 • <strong>Responsive design</strong> - Works perfectly on all screen sizes
               </li>
             </ul>
+          </div>
+        </div>
+
+        {/* Learn More Section */}
+        <div className='space-y-4'>
+          <div className='flex items-center space-x-3'>
+            <div className='text-2xl'>📚</div>
+            <h2 className='text-2xl font-semibold'>Learn More</h2>
+          </div>
+          <p className='text-gray-600 dark:text-gray-300'>Ready to get started? Explore these sections to learn more about WebShorts:</p>
+
+          <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+            <div className='bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4'>
+              <h4 className='font-semibold mb-2'>Getting Started</h4>
+              <ul className='text-sm space-y-1 text-gray-600 dark:text-gray-300'>
+                <li>
+                  • <DocsLink to='quick-start'>Quick Start Guide</DocsLink> - Installation and basic setup
+                </li>
+                <li>
+                  • <DocsLink to='configuring-webshorts'>Configuration</DocsLink> - Learn about the config file
+                </li>
+                <li>
+                  • <DocsLink to='webshorts-provider'>WebShorts Provider</DocsLink> - App wrapper setup
+                </li>
+              </ul>
+            </div>
+
+            <div className='bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4'>
+              <h4 className='font-semibold mb-2'>Advanced Usage</h4>
+              <ul className='text-sm space-y-1 text-gray-600 dark:text-gray-300'>
+                <li>
+                  • <DocsLink to='shortcut-listener'>Shortcut Listeners</DocsLink> - Page-specific shortcuts
+                </li>
+                <li>
+                  • <DocsLink to='webshorts-dialog'>Help Dialog</DocsLink> - Customizing the help dialog
+                </li>
+                <li>
+                  • <DocsLink to='custom-styling'>Custom Styling</DocsLink> - Theming and appearance
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>

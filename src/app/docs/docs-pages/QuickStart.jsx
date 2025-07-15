@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { tomorrow } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { Button } from '@/components/ui/button';
+import DocsLink from '@/components/DocsLink';
 
 // Custom CodeBlock component with copy functionality
 const CodeBlock = ({ children, language, style, customStyle }) => {
@@ -56,10 +57,10 @@ export default function QuickStart() {
               <h3 className='font-semibold text-yellow-800 dark:text-yellow-200 mb-2'>Next.js App Router Users</h3>
               <p className='text-yellow-700 dark:text-yellow-300 text-sm'>
                 Next.js requires additional configuration to work with WebShorts. See the{' '}
-                <a href='#nextjs-app-router-usage' className='underline font-medium'>
-                  Next.js App Router Usage
-                </a>{' '}
-                section for important integration details.
+                <DocsLink to='compatibility' className='text-yellow-700 dark:text-yellow-300 hover:text-yellow-800 dark:hover:text-yellow-200'>
+                  Compatibility
+                </DocsLink>{' '}
+                page for important integration details.
               </p>
             </div>
           </div>

@@ -38,9 +38,9 @@ const CodeBlock = ({ children, language, style, customStyle }) => {
   );
 };
 
-export default function WebShortsDialog() {
+export default function WebShortsDialogDoc() {
   return (
-    <div className='flex-1 p-6 max-w-4xl'>
+    <div className='flex-1 p-6 max-w-[880px]'>
       <div className='space-y-8'>
         {/* Header */}
         <div>

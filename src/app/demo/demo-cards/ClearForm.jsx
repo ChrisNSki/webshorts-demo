@@ -5,7 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { tomorrow } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import { ShortcutListener } from '@chrisnski/webshorts';
+import ClientShortcutListener from '@/components/ClientShortcutListener';
 import { toast } from 'sonner';
 import { Input } from '@/components/ui/input';
 import { Trash2 } from 'lucide-react';
@@ -144,9 +144,9 @@ const handleClearForm = () => {
             <textarea placeholder='Message' value={formData.message} onChange={(e) => handleInputChange('message', e.target.value)} className='w-full p-2 border rounded-md transition-all duration-300 resize-none' rows={3} />
           </div>
           <div className='text-sm text-gray-600 dark:text-gray-300 mt-4'>
-            <ShortcutListener keys='CTRL + SHIFT + C' action={handleClearForm}>
+            <ClientShortcutListener keys='CTRL + SHIFT + C' action={handleClearForm} shortName='Clear Form' description='Clear all form inputs'>
               <div className='bg-white/90 dark:bg-gray-800/90 hover:bg-white dark:hover:bg-gray-800 rounded-lg p-2'>Press "CTRL + SHIFT + C" to Clear Form</div>
-            </ShortcutListener>
+            </ClientShortcutListener>
           </div>
         </div>
       ) : (

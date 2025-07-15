@@ -5,7 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { tomorrow } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import { ShortcutListener } from '@chrisnski/webshorts';
+import ClientShortcutListener from '@/components/ClientShortcutListener';
 import { toast } from 'sonner';
 import { Moon, Sun } from 'lucide-react';
 
@@ -105,9 +105,9 @@ const handleToggleDarkMode = () => {
         <div className='flex flex-row items-center justify-center h-full'>
           <div className='text-6xl mb-4 transition-all duration-300'>{isDark ? <Sun className='w-20 h-20 text-yellow-400' /> : <Moon className='w-20 h-20 text-blue-600' />}</div>
           <div className='text-lg text-gray-600 dark:text-gray-300'>
-            <ShortcutListener keys='ALT + D' action={handleToggleDarkMode}>
+            <ClientShortcutListener keys='ALT + D' action={handleToggleDarkMode} shortName='Dark Mode' description='Toggle between light and dark mode'>
               <div className='bg-white/90 dark:bg-gray-800/90 hover:bg-white dark:hover:bg-gray-800 rounded-lg p-2 transition-all duration-300'>Press "ALT + D" to Toggle Dark Mode</div>
-            </ShortcutListener>
+            </ClientShortcutListener>
           </div>
         </div>
       ) : (

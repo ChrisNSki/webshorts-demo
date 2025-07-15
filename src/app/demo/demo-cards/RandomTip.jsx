@@ -5,7 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { tomorrow } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import { ShortcutListener } from '@chrisnski/webshorts';
+import ClientShortcutListener from '@/components/ClientShortcutListener';
 import { toast } from 'sonner';
 import { Lightbulb } from 'lucide-react';
 
@@ -148,9 +148,9 @@ const TipModal = ({ isVisible, tip, onClose }) => {
               <Lightbulb className='w-20 h-20' />
             </div>
             <div className='text-lg text-gray-600 dark:text-gray-300'>
-              <ShortcutListener keys='ALT + T' action={handleShowRandomTip}>
+              <ClientShortcutListener keys='ALT + T' action={handleShowRandomTip} shortName='Random Tip' description='Show a random helpful tip'>
                 <div className='bg-white/90 dark:bg-gray-800/90 hover:bg-white dark:hover:bg-gray-800 rounded-lg p-2'>Press "ALT + T" for Random Tip</div>
-              </ShortcutListener>
+              </ClientShortcutListener>
             </div>
           </div>
         ) : (

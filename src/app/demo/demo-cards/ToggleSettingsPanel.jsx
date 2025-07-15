@@ -5,7 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { tomorrow } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import { ShortcutListener } from '@chrisnski/webshorts';
+import ClientShortcutListener from '@/components/ClientShortcutListener';
 import { toast } from 'sonner';
 import { Settings, X, Palette, Bell, Shield, Monitor } from 'lucide-react';
 
@@ -148,9 +148,9 @@ const SettingsPanel = ({ isOpen, onClose }) => {
               <Settings className='w-20 h-20' />
             </div>
             <div className='text-lg text-gray-600 dark:text-gray-300'>
-              <ShortcutListener keys='ALT + S' action={handleToggleSettings}>
+              <ClientShortcutListener keys='ALT + S' action={handleToggleSettings} shortName='Settings' description='Toggle the settings panel'>
                 <div className='bg-white/90 dark:bg-gray-800/90 hover:bg-white dark:hover:bg-gray-800 rounded-lg p-2'>Press "ALT + S" to Toggle Settings</div>
-              </ShortcutListener>
+              </ClientShortcutListener>
             </div>
           </div>
         ) : (

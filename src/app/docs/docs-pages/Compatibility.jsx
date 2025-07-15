@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { tomorrow } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { Button } from '@/components/ui/button';
+import DocsLink from '@/components/DocsLink';
 
 // Custom CodeBlock component with copy functionality
 const CodeBlock = ({ children, language, style, customStyle }) => {
@@ -55,11 +56,11 @@ export default function Compatibility() {
             <h2 className='text-2xl font-semibold'>Next.js App Router</h2>
           </div>
 
-          <div className='bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-4'>
-            <h3 className='font-semibold text-yellow-800 dark:text-yellow-200 mb-2'>Important: Client Wrapper Required</h3>
-            <p className='text-yellow-700 dark:text-yellow-300 text-sm mb-4'>
-              If you are using <strong>Next.js App Router</strong> (the <code className='bg-yellow-100 dark:bg-yellow-800 px-1 rounded'>/app</code> directory), you must use a client wrapper for any context provider or hook-based library, including
-              WebShorts. This is required to support both SSR/metadata and client context/hooks.
+          <div className='bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4'>
+            <h3 className='font-semibold text-red-800 dark:text-red-200 mb-2'>⚠️ CRITICAL: Client Wrappers Required</h3>
+            <p className='text-red-700 dark:text-red-300 text-sm mb-4'>
+              If you are using <strong>Next.js App Router</strong> (the <code className='bg-red-100 dark:bg-red-800 px-1 rounded'>/app</code> directory), you <strong>MUST</strong> use client wrappers for both the WebShortsProvider and
+              ShortcutListener components. This is not optional - you <strong>WILL</strong> encounter SSR/hydration issues without them.
             </p>
           </div>
 
@@ -67,18 +68,33 @@ export default function Compatibility() {
 
           <div className='space-y-4'>
             <div>
-              <h4 className='font-semibold mb-2'>1. Create the Client Wrapper Component</h4>
+              <h4 className='font-semibold mb-2'>1. Create the Client Provider Wrapper</h4>
               <CodeBlock language='jsx' style={tomorrow}>
-                {`// components/WebShortsProviderWrapper.jsx (Client Component)
+                {`// components/ClientWebShortsProvider.jsx
 'use client';
+import { useEffect, useState } from 'react';
 import { WebShortsProvider, WebShortsDialog } from '@chrisnski/webshorts';
-import shortcutsConfig from '../webshorts.config.js';
+import { usePathname } from 'next/navigation';
+import { Toaster } from 'sonner';
 
-export default function WebShortsProviderWrapper({ children }) {
+export default function ClientWebShortsProvider({ children, config, className }) {
+  const [mounted, setMounted] = useState(false);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    // Return children without the provider during SSR
+    return children;
+  }
+
   return (
-    <WebShortsProvider config={shortcutsConfig} currentPage={pathname}>
+    <WebShortsProvider config={config} currentPage={pathname} className={className}>
       {children}
       <WebShortsDialog />
+      <Toaster position='bottom-right' richColors />
     </WebShortsProvider>
   );
 }`}
@@ -86,7 +102,25 @@ export default function WebShortsProviderWrapper({ children }) {
             </div>
 
             <div>
-              <h4 className='font-semibold mb-2'>2. Use in Root Layout</h4>
+              <h4 className='font-semibold mb-2'>2. Create the App Wrapper</h4>
+              <CodeBlock language='jsx' style={tomorrow}>
+                {`// components/WebShortsProviderWrapper.jsx
+'use client';
+import ClientWebShortsProvider from './ClientWebShortsProvider';
+import webshortsConfig from '../webshorts.config';
+
+export default function WebShortsProviderWrapper({ children, className }) {
+  return (
+    <ClientWebShortsProvider config={webshortsConfig} className={className}>
+      {children}
+    </ClientWebShortsProvider>
+  );
+}`}
+              </CodeBlock>
+            </div>
+
+            <div>
+              <h4 className='font-semibold mb-2'>3. Use in Root Layout</h4>
               <CodeBlock language='jsx' style={tomorrow}>
                 {`// app/layout.js (Server Component)
 export const metadata = { 
@@ -109,10 +143,61 @@ export default function RootLayout({ children }) {
 }`}
               </CodeBlock>
             </div>
+
+            <div>
+              <h4 className='font-semibold mb-2'>4. Create Client Wrapper for ShortcutListener (REQUIRED)</h4>
+              <CodeBlock language='jsx' style={tomorrow}>
+                {`// components/ClientShortcutListener.jsx
+'use client';
+import { useEffect, useState } from 'react';
+import { ShortcutListener } from '@chrisnski/webshorts';
+
+export default function ClientShortcutListener({ children, keys, action, shortName, description }) {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    // Return the children without the ShortcutListener wrapper during SSR
+    return children;
+  }
+
+  return (
+    <ShortcutListener 
+      keys={keys} 
+      action={action} 
+      shortName={shortName} 
+      description={description}
+    >
+      {children}
+    </ShortcutListener>
+  );
+}`}
+              </CodeBlock>
+            </div>
+
+            <div>
+              <h4 className='font-semibold mb-2'>5. Usage Example</h4>
+              <CodeBlock language='jsx' style={tomorrow}>
+                {`// Instead of using ShortcutListener directly:
+<ShortcutListener keys="CTRL + S" action={handleSave} shortName="Save" description="Save content">
+  <div>Press CTRL + S to save</div>
+</ShortcutListener>
+
+// Use the client wrapper:
+import ClientShortcutListener from '@/components/ClientShortcutListener';
+
+<ClientShortcutListener keys="CTRL + S" action={handleSave} shortName="Save" description="Save content">
+  <div>Press CTRL + S to save</div>
+</ClientShortcutListener>`}
+              </CodeBlock>
+            </div>
           </div>
 
           <div className='bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4'>
-            <h4 className='font-semibold text-blue-800 dark:text-blue-200 mb-2'>Why This Pattern is Required</h4>
+            <h4 className='font-semibold text-blue-800 dark:text-blue-200 mb-2'>Why Both Wrappers Are Required</h4>
             <ul className='text-blue-700 dark:text-blue-300 text-sm space-y-1'>
               <li>
                 • <strong>Server Components</strong> - Next.js App Router uses server components by default
@@ -121,10 +206,13 @@ export default function RootLayout({ children }) {
                 • <strong>Context Providers</strong> - WebShortsProvider is a client-side context provider
               </li>
               <li>
-                • <strong>Hooks Usage</strong> - WebShorts uses React hooks which require client components
+                • <strong>Shortcut Listeners</strong> - ShortcutListener components need client-side mounting
               </li>
               <li>
-                • <strong>SSR Compatibility</strong> - This pattern ensures proper server-side rendering
+                • <strong>SSR/Hydration Race</strong> - Both components will fail in production without wrappers
+              </li>
+              <li>
+                • <strong>Guaranteed Issues</strong> - This is not optional - you WILL encounter problems without these wrappers
               </li>
             </ul>
           </div>

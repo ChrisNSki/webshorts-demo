@@ -5,7 +5,7 @@ import License from './License';
 import ConfiguringWebShorts from './ConfiguringWebShorts';
 import WebShortsProvider from './WebShortsProvider';
 import ShortcutListeners from './ShortcutListeners';
-import WebshortsDialog from './WebshortsDialog';
+import WebshortsDialog from './WebShortsDialog';
 import CustomStyling from './CustomStyling';
 import UseShortcutsHooks from './UseShortcutsHooks';
 
