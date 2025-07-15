@@ -34,6 +34,11 @@ export default function Navigation() {
         </div>
       </div>
       <div id='right-top-bar' className='flex flex-row justify-center items-center gap-4'>
+        <Link href='https://www.npmjs.com/package/@chrisnski/webshorts'>
+          <Button variant='outline' className='font-semibold text-lg py-6 px-6 cursor-pointer text-white bg-red-500 hover:bg-red-400 hover:text-white'>
+            NPM
+          </Button>
+        </Link>
         <Link href='https://discord.gg/HXg4YxJgfX'>
           <Button variant='outline' className='font-semibold text-lg py-6 px-6 cursor-pointer bg-[#1f1f1f] text-white hover:bg-[#1f1f1f]/80 hover:text-white'>
             <Image src='/Discord-Symbol-Blurple.svg' alt='Discord Logo' width={25} height={25} />
