@@ -3,7 +3,7 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import LeftDocsNav from '../leftDocsNav';
-import WebshortsDialog from '../docs-pages/WebShortsDialog';
+import WebShortsDialog from '../docs-pages/WebShortsDialog';
 import ClientShortcutListener from '@/components/ClientShortcutListener';
 
 export default function WebShortsDialogPage() {
@@ -42,7 +42,7 @@ export default function WebShortsDialogPage() {
           <LeftDocsNav activeSection='webshorts-dialog' handleSectionClick={handleSectionClick} />
           <div className='flex flex-col w-full max-h-full'>
             <div className='flex flex-col w-full max-h-full overflow-y-auto'>
-              <WebshortsDialog />
+              <WebShortsDialog />
             </div>
             <div className='flex justify-between pt-6 mt-8 w-full'>
               <ClientShortcutListener keys='ALT + P' shortName='Previous Page' description='Previous Page' action={handlePreviousClick}>
