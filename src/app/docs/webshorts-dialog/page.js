@@ -3,7 +3,7 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import LeftDocsNav from '../leftDocsNav';
-import WebShortsDialog from '../docs-pages/WebShortsDialog';
+import WebShortsDialog from '../docs-pages/WebshortsDialog';
 import ClientShortcutListener from '@/components/ClientShortcutListener';
 
 export default function WebShortsDialogPage() {
