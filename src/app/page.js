@@ -4,9 +4,9 @@ import * as Dialog from '@radix-ui/react-dialog';
 export default function Home() {
   return (
     <div className='p-8 pb-20 gap-16 sm:p-20'>
-      <main className='max-w-6xl mx-auto flex flex-col justify-center items-center'>
+      <main className='w-[1000px] mx-auto flex flex-col justify-center items-center'>
         <div id='hero-section'>
-          <h1 className='w-full text-center'>WebShorts</h1>
+          <h1 className='flex w-full text-center justify-center'>WebShorts</h1>
           <p className='text-lg'>A modern, lightweight, and easy-to-use library for adding keyboard shortcuts to your website.</p>
         </div>
         <span className='text-lg font-bold pt-10'>Quick Install</span>

@@ -7,8 +7,8 @@ const webShortsConfig = {
     debug: false, // Enable debug toast notifications
     showDescriptions: true, // Show descriptions in help dialog
     helpDialogColumns: 2, // Number of columns in help dialog
-    dialogWidth: 800, // Help dialog width (px)
-    dialogHeight: 600, // Help dialog height (px)
+    dialogWidth: 900, // Help dialog width (px)
+    dialogHeight: 700, // Help dialog height (px)
   },
 
   // Global shortcuts (work on all pages)

@@ -16,9 +16,9 @@ export default function Navigation() {
               Home
             </Button>
           </Link>
-          <Link href='/about'>
+          <Link href='/docs'>
             <Button variant='ghost' className='font-semibold text-lg py-5 cursor-pointer'>
-              About
+              Docs
             </Button>
           </Link>
           <Link href='/demo'>

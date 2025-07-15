@@ -20,11 +20,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang='en'>
-      <body className={`${nunitoSans.variable} flex flex-col max-h-screen min-h-screen antialiased`}>
-        <WebShortsProviderWrapper className='flex flex-col w-full min-h-screen'>
-          <div className='flex flex-1 flex-col max-w-[1120px] min-h-full mx-auto'>
+      <body className={`${nunitoSans.variable} flex flex-col w-full max-h-screen justify-center items-center min-h-screen antialiased`}>
+        <WebShortsProviderWrapper className='flex flex-col w-full min-h-screen justify-center items-center'>
+          <div className='flex flex-1 flex-col max-w-[1120px] w-full overflow-y-auto'>
             <Navigation />
-            <main className='flex flex-col h-full'>{children}</main>
+            <main className='flex flex-1 w-full flex-col min-h-full overflow-y-auto'>{children}</main>
           </div>
           <Footer />
         </WebShortsProviderWrapper>
