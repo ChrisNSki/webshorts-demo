@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import LeftDocsNav from '../leftDocsNav';
 import Features from '../docs-pages/Features';
 import ClientShortcutListener from '@/components/ClientShortcutListener';
+import Script from 'next/script';
 
 export default function FeaturesPage() {
   const handleSectionClick = (section) => {
@@ -37,30 +38,76 @@ export default function FeaturesPage() {
   };
 
   return (
-    <div className='flex min-h-full p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]'>
-      <div className='mx-auto flex flex-col justify-center items-center min-h-full w-full'>
-        <div className='flex flex-row justify-start items-start gap-4 w-[1100px] max-h-full'>
-          <LeftDocsNav activeSection='features' handleSectionClick={handleSectionClick} />
-          <div className='flex flex-col w-full max-h-full'>
-            <div className='flex flex-col w-full max-h-full overflow-y-auto'>
-              <Features />
-            </div>
-            {/* Navigation Buttons */}
-            <div className='flex justify-between pt-6 mt-8 w-full'>
-              <ClientShortcutListener keys='ALT + P' shortName='Previous Page' description='Previous Page' action={handlePreviousClick}>
-                <Button variant='outline' className='text-sm' onClick={handlePreviousClick}>
-                  ← Previous: Quick Start
-                </Button>
-              </ClientShortcutListener>
-              <ClientShortcutListener keys='ALT + N' shortName='Next Page' description='Next Page' action={handleNextClick}>
-                <Button variant='outline' className='text-sm' onClick={handleNextClick}>
-                  Next: Compatibility →
-                </Button>
-              </ClientShortcutListener>
+    <>
+      <Script
+        id='features-structured-data'
+        type='application/ld+json'
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'TechArticle',
+            headline: 'WebShorts Features - Complete Guide',
+            description: 'Explore all WebShorts features including keyboard shortcuts, dialog customization, Next.js integration, and advanced functionality',
+            author: {
+              '@type': 'Person',
+              name: 'ChrisNSki',
+            },
+            publisher: {
+              '@type': 'Organization',
+              name: 'WebShorts',
+            },
+            datePublished: new Date().toISOString(),
+            dateModified: new Date().toISOString(),
+            mainEntityOfPage: {
+              '@type': 'WebPage',
+              '@id': 'https://webshorts.dev/docs/features',
+            },
+            about: [
+              {
+                '@type': 'Thing',
+                name: 'Keyboard Shortcuts',
+              },
+              {
+                '@type': 'Thing',
+                name: 'React Library',
+              },
+              {
+                '@type': 'Thing',
+                name: 'User Experience',
+              },
+              {
+                '@type': 'Thing',
+                name: 'Web Development',
+              },
+            ],
+          }),
+        }}
+      />
+      <div className='flex min-h-full p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]'>
+        <div className='mx-auto flex flex-col justify-center items-center min-h-full w-full'>
+          <div className='flex flex-row justify-start items-start gap-4 w-[1100px] max-h-full'>
+            <LeftDocsNav activeSection='features' handleSectionClick={handleSectionClick} />
+            <div className='flex flex-col w-full max-h-full'>
+              <div className='flex flex-col w-full max-h-full overflow-y-auto'>
+                <Features />
+              </div>
+              {/* Navigation Buttons */}
+              <div className='flex justify-between pt-6 mt-8 w-full'>
+                <ClientShortcutListener keys='ALT + P' shortName='Previous Page' description='Previous Page' action={handlePreviousClick}>
+                  <Button variant='outline' className='text-sm' onClick={handlePreviousClick}>
+                    ← Previous: Quick Start
+                  </Button>
+                </ClientShortcutListener>
+                <ClientShortcutListener keys='ALT + N' shortName='Next Page' description='Next Page' action={handleNextClick}>
+                  <Button variant='outline' className='text-sm' onClick={handleNextClick}>
+                    Next: Compatibility →
+                  </Button>
+                </ClientShortcutListener>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

@@ -1,0 +1,21 @@
+{
+  "name": "WebShorts - Modern Keyboard Shortcuts for React",
+  "short_name": "WebShorts",
+  "description": "A modern, lightweight, and easy-to-use library for adding keyboard shortcuts to your React website",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/WebShorts.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["developer", "productivity", "utilities"],
+  "lang": "en",
+  "dir": "ltr"
+}
